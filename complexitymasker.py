@@ -10,6 +10,8 @@ from Bio import SeqIO
 from Bio import SeqRecord
 from Bio.Seq import Seq
 from Bio.Alphabet import generic_dna
+from Bio import BiopythonWarning
+import warnings
 import ray
 import numpy as np
 
@@ -121,7 +123,7 @@ class ComplexityMasker:
             
         Raises:
             None
-        """
+        """            
         kmer_dict = {}
         for i in range(0,len(sequence)-self.kmer_length):
             kmer = sequence[i:i+self.kmer_length]
@@ -169,11 +171,14 @@ class ComplexityMasker:
         Raises:
             None
         """
+        
         index = 0
         sub_sequence = sequence[index:index+self.window_size]
         kmer_trace = []
         while(index+self.window_size < len(sequence)):
-            kmer_dict = self.non_canonical_kmerize(sub_sequence)
+            with warnings.catch_warnings():
+                warnings.simplefilter('ignore')
+                kmer_dict = self.non_canonical_kmerize(sub_sequence)
             kmer_trace.append(len(kmer_dict.keys())/self.window_size)
             index += self.step_size
             sub_sequence = sequence[index:index+self.window_size]

@@ -10,6 +10,8 @@ import graph_tool as gt
 from graph_tool.all import *
 import random
 import numpy as np
+import warnings
+from Bio import BiopythonWarning
 
 
 class CycleFinder:
@@ -35,7 +37,7 @@ class CycleFinder:
         return kmer_transitions
 
     
-    def generate_kmer_dict(self, sequence, k=21):
+    def generate_kmer_dict(self, sequence, k=21):  
     
         kmer_dict = {}
         for i in range(0,len(sequence)-k):
@@ -49,7 +51,7 @@ class CycleFinder:
         
     def generate_graph_from_sequence(self, sequence, k=21, filter_singles=False):
         
-        graph = gt.Graph(directed=True)
+        graph = gt.Graph(directed=True) 
         kmer_dict = self.generate_kmer_dict(sequence, k)
         kmer_transitions = self.generate_kmer_transitions(sequence, k)
         

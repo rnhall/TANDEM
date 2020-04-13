@@ -11,9 +11,11 @@ from cyclefinder import CycleFinder
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
+from Bio import BiopythonWarning
 import csv
 import ray
 import argparse
+import warnings
 
 class Tandem:
     
@@ -24,11 +26,13 @@ class Tandem:
     @ray.remote
     def cyclefinder_graph_generation(self, kmer_len, sequence):
         g = CycleFinder(verbose=True)
-        graph = g.generate_graph_from_sequence(sequence.seq, k=kmer_len, filter_singles=True)
-        graph = g.negate_edge_weights(graph)
-        graph = g.prune_graph(graph)
-        subs = g.split_into_subgraphs(graph)
-        graphs_and_consensus = g.get_graph_and_consensus(subs)
+        with warnings.catch_warnings():
+            warnings.simplefilter('ignore') 
+            graph = g.generate_graph_from_sequence(sequence.seq, k=kmer_len, filter_singles=True)
+            graph = g.negate_edge_weights(graph)
+            graph = g.prune_graph(graph)
+            subs = g.split_into_subgraphs(graph)
+            graphs_and_consensus = g.get_graph_and_consensus(subs)
         return graphs_and_consensus
     
     @ray.remote
@@ -43,9 +47,6 @@ class Tandem:
                                       cm_fasta_filename = "Low_Complexity_Intervals.fasta", cm_gtf_filename = "Low_Complexity_Intervals.gtf",
                                       cf_fasta_filename = "Consensus_Repeats.fasta", cf_gtf_filename = "Tandem_Repeat_Intervals.gtf"):
         
-        #ray.init()
-        
-        # try:
         if complexity_filter:
             #Determines regions of low-complexity and saves them as sequences and
             #as intervals
@@ -122,12 +123,8 @@ class Tandem:
             
         SeqIO.write(unique_consensus_records, "Unique_Consensus_Sequences.fasta", "fasta") 
         
-        #ray.shutdown()
         print("Done! Thanks for using TANDEM :)")
-        # except:
-        #     print("Some error happened!")
-        #     ray.shutdown()
-        
+
 
 
 def __main__():
@@ -178,8 +175,6 @@ def __main__():
     cm_gtf_filename = args['cm_gtf_filename']
     cf_fasta_filename = args['cf_fasta_filename']
     cf_gtf_filename = args['cf_gtf_filename']
-    
-    print(args)
     
     ray.init()
     try:
