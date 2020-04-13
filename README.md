@@ -1,5 +1,7 @@
 # TANDEM
 A tool for finding tandem repeats in genomic assembles and reads
 
-Installation:
-//WORK IN PROGRESS
+Installation Instructions:
+
+Install the latest version of Miniconda (or Anaconda):
+
