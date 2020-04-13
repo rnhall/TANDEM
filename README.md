@@ -45,6 +45,7 @@ You may have to enable the file to be run ($chmod +x tandem.py)
 
 $./tandem.py test_sequence
 
+(You may need to install libgtk-3-0, $sudo apt install libgtk-3-0)
 
 How to use TANDEM:
 
