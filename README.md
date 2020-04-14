@@ -3,7 +3,7 @@ A tool for finding tandem repeats in genomic assembles and reads.
 
 ## Installation Instructions:
 
-Install the latest version of Miniconda (or Anaconda):
+Install the latest version of Miniconda (or Anaconda). If you already have either installed, skip to cloning the repository:
 ```
 $wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
