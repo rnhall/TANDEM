@@ -43,7 +43,7 @@ Once the environment is done being set up, try running TANDEM on a test file:
 
 You may have to enable the file to be run ($chmod +x tandem.py)
 
-$./tandem.py test_sequence
+$./tandem.py -genome test_sequence
 
 (You may need to install libgtk-3-0, $sudo apt install libgtk-3-0)
 
