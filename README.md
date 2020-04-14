@@ -1,16 +1,16 @@
 # TANDEM
-A tool for finding tandem repeats in genomic assembles and reads
+A tool for finding tandem repeats in genomic assembles and reads.
 
-Installation Instructions:
+##Installation Instructions:
 
 Install the latest version of Miniconda (or Anaconda):
-
+'''
 $wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 $chmod +x Miniconda3-latest-Linux-x86_64.sh
 
 $./Miniconda3-latest-Linux-x86_64.sh
-
+'''
 
 Restart your terminal to auto-enter your base conda environment.
 
