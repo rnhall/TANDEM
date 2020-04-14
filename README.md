@@ -57,7 +57,11 @@ $sudo apt install libgtk-3-0
 
 TANDEM, in its present form can be split into two major steps: first, a coarse search for low-complexity regions (complexity_masker) of the genome provides a subset of sequences which is then further analyzed by a graph-based repeat finder (cycle_finder). 
 
+![image](https://user-images.githubusercontent.com/19410139/79277050-f1158880-7e5d-11ea-99ef-27cce06461db.png)
+First, complexity_masker slides a window across each chromosome or contig in your genome file. It then calculates a k-mer complexity score for each bin. After calculating the k-mer complexity score across all provided sequences, it identifies regions of the genome where the k-mer complexity fell below the designated cutoff (default is 0.8). 
 
+![image](https://user-images.githubusercontent.com/19410139/79277036-ebb83e00-7e5d-11ea-9bfb-0f204c1f5ad6.png)
+Then, each low-complexity region is further analyzed by cycle_finder. This too converts each region of interest into a directed graph of k-mers. Each node represents a k-mer, and each edge represents a k-mer transitioning from one to another. The edges are weighed by how often that transition is observed, normalized by the sum of all outgoing edge weights, then the -log is taken to ensure that frequent transitions are small positive values and infrequent transitions are large positive values. This step is important since the consensus sequence is determined to be the cycle which maximizes the number of nodes visited while minimizing the sum of edge weights. Importantly, repetitive sequences produce cyclic graphs while unique regions do not. Once all regions have been analyzed and repetitive sequences have been found, only repeats that are larger than size_cutoff and occupy space on the genome larger than length_cutoff are reported.  
 
 ## How to use TANDEM:
 
