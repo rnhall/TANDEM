@@ -53,10 +53,25 @@ You may also need to install libgtk-3-0:
 $sudo apt install libgtk-3-0
 ```
 
+## How does TANDEM work?
+
+TANDEM, in its present form can be split into two major steps: first, a coarse search for low-complexity regions (complexity_masker) of the genome provides a subset of sequences which is then further analyzed by a graph-based repeat finder (cycle_finder). 
+
+
+
 ## How to use TANDEM:
 
-TANDEM, in its present form can be split into two major steps: first, a coarse search for low-complexity regions (complexity_masker) of the genome provides a subset of sequences which is then further analyzed by a graph-based repeat finder (cycle_finder). The program provides outputs in the form of a .fasta and .gtf file containing the identified low-complexity regions, a .fasta and .gtf of assembled repeat monomers and their locations in the genome, and finally a .fasta containing a list of all unique consensus repeat monomers. 
+The program provides outputs in the form of a .fasta and .gtf file containing the identified low-complexity regions, a .fasta and .gtf of assembled repeat monomers and their locations in the genome, and finally a .fasta containing a list of all unique consensus repeat monomers. 
 
+For details on required and optional parameters, use the help functionality:
+```
+$./tandem.py -h
+```
+
+The minimal use case will use the default parameters:
+```
+$./tandem.py -genome {path/to/genome.fasta}
+```
 
 
 
