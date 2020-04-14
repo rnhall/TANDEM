@@ -22,6 +22,7 @@ $sudo apt-get install git
 Clone this repository into a directory of your choice:
 
 $git clone https://github.com/rnhall/TANDEM.git
+
 $cd TANDEM
 
 
